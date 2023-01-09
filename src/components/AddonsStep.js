@@ -1,49 +1,41 @@
-import { useState } from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { thirdStepData } from '../store/formSlice';
-import {useForm} from 'react-hook-form';
+import { finalStepData } from '../store/formSlice';
+import { setAddon } from "./addon-step-slice";
 
 const Addons = () => {
-  const [addon, setAddon] = useState([
-    {
-      addonName: 'Online Service',
-      addonDetails: 'Access to multiplayer games',
-      addonPrice: 1,
-      addonId: 0,
-    },
-    {
-      addonName: 'Larger storage',
-      addonDetails: 'Extra 1TB of cloud save',
-      addonPrice: 2,
-      addonId: 1,
-    },
-    {
-      addonName: 'Customizable profile',
-      addonDetails: 'Custom theme on your profile',
-      addonPrice: 2,
-      addonId: 2,
-    },
-  ])
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const planDuration = useSelector(state => state.form.formData.planDuration)
+  const addons = useSelector(state => state.addons.addons)
+  console.log(planDuration);
+  
 
   const onSubmit = (data) => {
-    dispatch(thirdStepData(data))
+    dispatch(finalStepData(data))
     navigate("/summary");
   }
 
-  const handleSubmit = () => {};
+  const handleCheck = (id) => {
+    console.log(id);
+    dispatch((setAddon(id)))
+  }
+
+  const handleSubmit = () => {
+    
+  };
 
   return (
     <>
       <div>Step three. Addons</div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {addon.map(i => (
+        {addons.map(i => (
             <div id={i.addonId}>
-              <input type="checkbox"/>
+              <input 
+                type="checkbox"
+                checked={i.selected}
+                onChange={() => handleCheck(i.addonId)}
+                />
               <div>
                 <span>{i.addonName}</span>
                 <span>{i.addonDetails}</span>

@@ -10,6 +10,7 @@ const formSlice = createSlice({
                 phoneNumber: null,
                 planName: null,
                 planDuration: null,
+                planPrice: 0,
                 onlineService: '',
                 additionalStorage: '',
                 customizableProfile: '',
@@ -22,12 +23,13 @@ const formSlice = createSlice({
             state.formData.phoneNumber = action.payload.phoneNumber
         },
         secondStepData(state, action) {
+            console.log(action.payload);
             state.formData.planName = action.payload.planName
             state.formData.planPrice = action.payload.planPrice
             state.formData.planDuration = action.payload.planDuration
         },
         thirdStepData(state, action) {
-            state.formData.push({thirdStep: action.payload})
+            state.formData.push({thirdStep: action.payload}) 
         },
         finalStepData(state, action) {
             state.formData.push({forthStep: action.payload})
@@ -38,3 +40,5 @@ const formSlice = createSlice({
 export const {firstStepData, secondStepData, thirdStepData, finalStepData} = formSlice.actions;
 
 export default formSlice.reducer;
+
+export const selectUserPlanDuration = state => state.formData.planDuration;
