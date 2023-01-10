@@ -28,14 +28,17 @@ const addonStep = createSlice({
         ]
     },
     reducers: {
-        setAddon(state, action) {
-            const index = state.addons.findIndex(i => i.addonId === action.payload)
-            
-            state.addons[index].selected = true
-        },
+      setAddon(state, action) {
+        const index = state.addons.findIndex(i => i.addonId === action.payload)
+        if(state.addons[index].selected === false) {
+          state.addons[index].selected = true
+        } else {
+          state.addons[index].selected = false
+        }
+      },
     }
 })
 
-export const {setAddon} = addonStep.actions;
+export const {setAddon, setAddonPrice} = addonStep.actions;
 
 export default addonStep.reducer;

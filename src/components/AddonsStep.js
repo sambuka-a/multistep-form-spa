@@ -7,28 +7,33 @@ const Addons = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const planDuration = useSelector(state => state.form.formData.planDuration)
-  const addons = useSelector(state => state.addons.addons)
   console.log(planDuration);
-  
+  const addons = useSelector(state => state.addons.addons)
 
-  const onSubmit = (data) => {
-    dispatch(finalStepData(data))
+  const onSubmit = () => {
+    const selectedAddons = addons.filter(i => i.selected)
+    const selectedAddonsTitle = selectedAddons.map(i => i.addonName)
+    let selectedAddonsPrice = 0
+    if(planDuration === 'yr') {
+      selectedAddonsPrice = selectedAddons.reduce((acc, i) => acc + i.addonPrice, 0) * 10
+    } else {
+      selectedAddonsPrice = selectedAddons.reduce((acc, i) => acc + i.addonPrice, 0)
+    }
+    dispatch(finalStepData({
+      selectedAddons: selectedAddonsTitle,
+      addonsTotalPrice: selectedAddonsPrice
+    }))
     navigate("/summary");
   }
 
   const handleCheck = (id) => {
-    console.log(id);
     dispatch((setAddon(id)))
   }
-
-  const handleSubmit = () => {
-    
-  };
 
   return (
     <>
       <div>Step three. Addons</div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
         {addons.map(i => (
             <div id={i.addonId}>
               <input 
@@ -40,12 +45,12 @@ const Addons = () => {
                 <span>{i.addonName}</span>
                 <span>{i.addonDetails}</span>
               </div>
-              <span>{i.addonPrice}</span>
+              <span>{planDuration === 'yr' ? i.addonPrice * 10 : i.addonPrice} {`/ ${planDuration}`}</span>
             </div>
           ))}
           <button onClick={() => {navigate("/plan")}}>Prev</button>
-          <button onClick={() => {navigate("/finishing")}}>Next</button>
-      </form>
+          <button onClick={() => {onSubmit()}}>Next</button>
+      </div>
     </>
   )
 }

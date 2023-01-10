@@ -7,13 +7,13 @@ const UserPlan = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userPlanFormData = useSelector(state => state.userPlan.userPlans)
-  const planDuration = useSelector(state => state.userPlan.userPlanDuration.dur)
+  const planIsMonthly = useSelector(state => state.userPlan.userPlanIsMonthly)
+  console.log(planIsMonthly);
   const selectedPlan = useSelector(state => state.userPlan.userPlans.filter(i => i.selected))
-  console.log(selectedPlan);
 
   const handlePlanDuration = () => {
     dispatch(setUserPlanDuration(
-      planDuration === 'mo' ? 'yr' : 'mo'
+      planIsMonthly ? false : true
     ))
   }
 
@@ -25,7 +25,7 @@ const UserPlan = () => {
     dispatch(secondStepData({
       planName: selectedPlan[0].planName, 
       planPrice: selectedPlan[0].planPrice, 
-      planDuration
+      planIsMonthly
     }))
     navigate("/addons")
   }
@@ -42,15 +42,18 @@ const UserPlan = () => {
           <img src={i.icon} alt='planImage'/>
           <div>
             <span>{i.planName}</span>
-            <span>{`$${i.planPrice}/${planDuration}`}</span>
-            {planDuration === "yr" && <span>2 months free</span>}
+            <span>{`$${i.planPrice}/${planIsMonthly ? 'mo' : 'yr'}`}</span>
+            {!planIsMonthly && <span>2 months free</span>}
           </div>
         </div>
         ))}
       </div>
       <div>
         monthly
-        <input type="checkbox" onChange={() => {handlePlanDuration()}}/>
+        <input 
+          type="checkbox"
+          checked={!planIsMonthly} 
+          onChange={() => {handlePlanDuration()}}/>
         yearly
       </div>
       <button onClick={() => {navigate("/")}}>Prev</button>

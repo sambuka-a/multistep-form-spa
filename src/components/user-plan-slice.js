@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const userPlanSlice = createSlice({
     name: "@@userPlan",
     initialState: {
-        userPlanDuration: {dur: 'mo'},
+        userPlanIsMonthly: true,
         userPlans:[
             {
               id: 0,
@@ -31,12 +31,13 @@ const userPlanSlice = createSlice({
     reducers: {
         setUserPlanDuration(state, action) {
             const planDuration = action.payload;
-            state.userPlanDuration.dur = planDuration
+            console.log(planDuration);
+            state.userPlanIsMonthly = planDuration;
             state.userPlans.map(i => {
-                if (planDuration === 'yr') {
-                    i.planPrice = i.planPrice *10
-                } else {
+                if (planDuration) {
                     i.planPrice = i.planPrice / 10
+                } else {
+                    i.planPrice = i.planPrice * 10
                 }
             })
         },

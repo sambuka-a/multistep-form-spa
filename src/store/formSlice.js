@@ -11,9 +11,7 @@ const formSlice = createSlice({
                 planName: null,
                 planDuration: null,
                 planPrice: 0,
-                onlineService: '',
-                additionalStorage: '',
-                customizableProfile: '',
+                addons: [],
             }
     },
     reducers: {
@@ -23,16 +21,19 @@ const formSlice = createSlice({
             state.formData.phoneNumber = action.payload.phoneNumber
         },
         secondStepData(state, action) {
-            console.log(action.payload);
             state.formData.planName = action.payload.planName
             state.formData.planPrice = action.payload.planPrice
-            state.formData.planDuration = action.payload.planDuration
-        },
-        thirdStepData(state, action) {
-            state.formData.push({thirdStep: action.payload}) 
+            const planDuration = action.payload.planIsMonthly
+            if(planDuration) {
+                state.formData.planDuration = 'mo'
+            } else {
+                state.formData.planDuration = 'yr'
+            }  
         },
         finalStepData(state, action) {
-            state.formData.push({forthStep: action.payload})
+            console.log(action.payload.selectedAddons);
+            state.formData.addons = action.payload.selectedAddons
+            state.formData.planPrice = state.formData.planPrice + action.payload.addonsTotalPrice
         },
     }
 })
