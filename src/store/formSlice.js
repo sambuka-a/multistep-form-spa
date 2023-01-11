@@ -11,7 +11,8 @@ const formSlice = createSlice({
                 planName: null,
                 planDuration: null,
                 planPrice: 0,
-                addons: [],
+                priceMultiplier: 10,
+                addons: null,
             }
     },
     reducers: {
@@ -31,9 +32,8 @@ const formSlice = createSlice({
             }  
         },
         finalStepData(state, action) {
-            console.log(action.payload.selectedAddons);
-            state.formData.addons = action.payload.selectedAddons
-            state.formData.planPrice = state.formData.planPrice + action.payload.addonsTotalPrice
+            console.log(action.payload);
+            state.formData.addons = action.payload
         },
     }
 })
@@ -41,5 +41,3 @@ const formSlice = createSlice({
 export const {firstStepData, secondStepData, thirdStepData, finalStepData} = formSlice.actions;
 
 export default formSlice.reducer;
-
-export const selectUserPlanDuration = state => state.formData.planDuration;
