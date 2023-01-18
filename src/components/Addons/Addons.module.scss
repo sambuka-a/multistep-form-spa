@@ -1,0 +1,184 @@
+@import '../../Styles/variables.scss';
+
+.addons {
+    height: 100vh;
+    max-width: $sm;
+    margin: 0 auto;
+    background-color: $magnolia;
+    font-family: $ubuntuFont;
+
+    .steps {
+        height: 150px;
+        background: url('../../assets/images/bg-sidebar-mobile.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+
+        .stepsIcon {
+            width: 180px;
+            display: flex;
+            justify-content: space-between;
+
+            > span {
+                width: 35px;
+                height: 35px;
+                border: 1px solid $alabaster;
+                color: $alabaster;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .selected {
+                background-color: $alabaster;
+                color: $marineBlue;
+            }
+        }
+    }
+
+    .content {
+        height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        top: -50px;
+
+        .container {
+            max-width: $sm;
+            margin: 0 auto;
+            background-color: $alabaster;
+            border-radius: 5px;
+            padding: 20px 15px;
+
+            .hero {
+                > h1 {
+                    margin: 10px 0 10px 10px;
+                    font-size: $fs-reg;
+                    font-weight: $fw-bold;
+                    color: $marineBlue;
+                }
+                > p {
+                    margin: 10px 0 10px 10px;
+                    font-size: $fs-sm;
+                    font-weight: $fw-light;
+                    color: $coolGray;
+                }
+            }
+
+            .cards {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+
+                .card {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px;
+                    border: 1px solid $lightGray;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+
+                    .checkAndName {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }
+
+                    .planDetails {
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 15px;
+
+                        .planTitle {
+                            font-weight: $fw-regular;
+                            font-size: $fs-sm;
+                            color: $marineBlue;
+                            padding-bottom: 5px;
+                        }
+
+                        > span {
+                            color: $coolGray;
+                            padding-bottom: 5px;
+                        }
+
+                    }
+                }
+
+                .price {
+                    font-size: $fs-sm;
+                    font-weight: $fw-regular;
+                    color: $purplishBlue;
+                }
+            }
+
+            input[type="checkbox"] {
+                appearance: none;
+                width: 25px;
+                height: 25px;
+                border-radius: 5px;
+                border: 1px solid $coolGray;
+                cursor: pointer;
+                transition: background-color 0.4s;
+               
+                &:after {
+                    content: url(../../assets/images/icon-checkmark.svg);
+                    position: relative;
+                    top: 4px;
+                    left: 5px;
+                    width: 20px;
+                    height: 20px;
+                    display: none;
+                    transition: transform 0.4s;
+                }
+
+               &:checked {
+                background-color: $purplishBlue;
+               } 
+
+               &:checked::after {
+                display: block;
+               } 
+
+               
+
+            }
+            
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            background-color: $white;
+
+            > button {
+                padding: 5px 20px;
+                margin: 15px 10px;
+                background-color: $marineBlue;
+                color: $magnolia;
+                border-radius: 4px;
+                border: none;
+                font-size: $fs-sm;
+                font-weight: $fw-regular;
+
+                &:hover {
+                    background-color: $coolGray;
+                }
+            }
+
+            .prev {
+                color: $coolGray;
+                background: none;
+                
+                &:hover{
+                    background-color: $lightGray
+                }
+            }
+        }
+    }
+}

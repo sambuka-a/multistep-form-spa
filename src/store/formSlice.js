@@ -7,9 +7,9 @@ const formSlice = createSlice({
             {
                 userName: '',
                 userEmail: '',
-                phoneNumber: null,
-                planName: null,
-                planDuration: null,
+                phoneNumber: '',
+                planName: '',
+                planDuration: '',
                 planPrice: 0,
                 priceMultiplier: 10,
                 addons: null,
@@ -17,9 +17,10 @@ const formSlice = createSlice({
     },
     reducers: {
         firstStepData(state, action) {
-            state.formData.userName = action.payload.name
-            state.formData.userEmail = action.payload.email
-            state.formData.phoneNumber = action.payload.phoneNumber
+            console.log(action.payload);
+            state.formData.userName = action.payload.userName
+            state.formData.userEmail = action.payload.userEmail || state.formData.userEmail
+            state.formData.phoneNumber = action.payload.phoneNumber || state.formData.phoneNumber
         },
         secondStepData(state, action) {
             state.formData.planName = action.payload.planName

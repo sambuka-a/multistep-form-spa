@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import formReducer from './formSlice'
-import userPlanReducer from '../components/user-plan-slice'
-import addonStepReducer from '../components/addon-step-slice'
+import userPlanReducer from '../components/UserPlan/user-plan-slice'
+import addonStepReducer from '../components/Addons/addon-step-slice'
 
 export default configureStore({
     reducer: {

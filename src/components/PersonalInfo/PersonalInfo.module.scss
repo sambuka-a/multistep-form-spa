@@ -1,0 +1,113 @@
+@import '../../Styles/variables.scss';
+
+.personal {
+    height: 100vh;
+    max-width: $sm;
+    margin: 0 auto;
+    background-color: $magnolia;
+    font-family: $ubuntuFont;
+
+    .steps {
+        height: 150px;
+        background: url('../../assets/images/bg-sidebar-mobile.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+
+        .stepsIcon {
+            width: 180px;
+            display: flex;
+            justify-content: space-between;
+
+            > span {
+                width: 35px;
+                height: 35px;
+                border: 1px solid $alabaster;
+                color: $alabaster;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .selected {
+                background-color: $alabaster;
+                color: $marineBlue;
+            }
+        }
+    }
+
+    .content {
+        height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        top: -50px;
+
+        .container {
+            max-width: $sm;
+            margin: 0 auto;
+            background-color: $alabaster;
+            border-radius: 5px;
+            padding: 20px 15px;
+
+            .hero {
+                > h1 {
+                    margin: 10px 0 10px 10px;
+                    font-size: $fs-reg;
+                    font-weight: $fw-bold;
+                    color: $marineBlue;
+                }
+                > p {
+                    margin: 10px 0 10px 10px;
+                    font-size: $fs-sm;
+                    font-weight: $fw-light;
+                    color: $coolGray;
+                }
+            }
+
+            > form {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+
+                > label {
+                    padding: 5px 0;
+                    color: $marineBlue;
+                }
+
+                > input {
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    font-size: $fs-sm;
+                    border: 1px solid $coolGray;
+                    border-radius: 4px;
+                    color: $coolGray;
+                }            
+            }
+        }
+        .footer {
+            display: flex;
+            justify-content: flex-end;
+            height: 80px;
+            background-color: $white;
+
+            > button {
+                padding: 5px 20px;
+                margin: 15px 10px;
+                background-color: $marineBlue;
+                color: $magnolia;
+                border-radius: 4px;
+                border: none;
+                font-size: $fs-sm;
+                font-weight: $fw-regular;
+
+                &:hover {
+                    background-color: $coolGray;
+                }
+            }
+        }
+    }
+}

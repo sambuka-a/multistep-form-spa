@@ -1,12 +1,9 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import PersonalInfo from './components/PersonalInfo';
-import UserPlan from './components/UserPlan';
-import AddonsStep from './components/AddonsStep';
-import FinishingUp from './components/FinishingUp';
-import Summary from './components/Summary';
-
-
-import './App.css';
+import PersonalInfo from './components/PersonalInfo/PersonalInfo';
+import UserPlan from './components/UserPlan/UserPlan';
+import AddonsStep from './components/Addons/AddonsStep';
+import FinishingUp from './components/FinishingUp/FinishingUp';
+import Summary from './components/Summary/Summary';
 
 function App() {
   return (
