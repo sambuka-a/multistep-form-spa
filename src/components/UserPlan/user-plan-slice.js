@@ -34,9 +34,9 @@ const userPlanSlice = createSlice({
             state.userPlanIsMonthly = planDuration;
             state.userPlans.map(i => {
                 if (planDuration) {
-                    i.planPrice = i.planPrice / 10
+                    return i.planPrice = i.planPrice / 10
                 } else {
-                    i.planPrice = i.planPrice * 10
+                    return i.planPrice = i.planPrice * 10
                 }
             })
         },
