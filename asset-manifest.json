@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/multistep-form-spa/static/css/main.f5f1f215.css",
+    "main.js": "/multistep-form-spa/static/js/main.5dd8b702.js",
+    "static/media/bg-sidebar-desktop.svg": "/multistep-form-spa/static/media/bg-sidebar-desktop.6918153f38678372ceb1.svg",
+    "static/media/bg-sidebar-mobile.svg": "/multistep-form-spa/static/media/bg-sidebar-mobile.ad41661b40ca0b967f3a.svg",
+    "static/media/icon-thank-you.svg": "/multistep-form-spa/static/media/icon-thank-you.ee753f231cc5a5789b8eb922a96472c0.svg",
+    "index.html": "/multistep-form-spa/index.html",
+    "static/media/icon-checkmark.svg": "/multistep-form-spa/static/media/icon-checkmark.6ba72db67010be44885b.svg",
+    "main.f5f1f215.css.map": "/multistep-form-spa/static/css/main.f5f1f215.css.map",
+    "main.5dd8b702.js.map": "/multistep-form-spa/static/js/main.5dd8b702.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5f1f215.css",
+    "static/js/main.5dd8b702.js"
+  ]
+}
