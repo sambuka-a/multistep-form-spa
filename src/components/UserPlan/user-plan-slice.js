@@ -31,7 +31,6 @@ const userPlanSlice = createSlice({
     reducers: {
         setUserPlanDuration(state, action) {
             const planDuration = action.payload;
-            console.log(planDuration);
             state.userPlanIsMonthly = planDuration;
             state.userPlans.map(i => {
                 if (planDuration) {

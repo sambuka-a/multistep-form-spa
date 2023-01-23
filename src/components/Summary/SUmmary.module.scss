@@ -1,0 +1,282 @@
+@import '../../Styles/variables.scss';
+
+.summary {
+    height: 100vh;
+    max-width: $sm;
+    margin: 0 auto;
+    background-color: $magnolia;
+    font-family: $ubuntuFont;
+
+    @include breakpoint(sm) {
+        max-width: 100%;
+        width: 880px;
+        max-height: 700px;
+        height: 600px;
+        border-radius: 16px;
+        background-color: $alabaster;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        padding: 15px; 
+    }
+
+    .steps {
+        height: 150px;
+        background: url('../../assets/images/bg-sidebar-mobile.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+
+        @include breakpoint(sm) {
+            background: url('../../assets/images/bg-sidebar-desktop.svg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 275px;
+            border-radius: 10px;
+        }
+
+        .stepsIcon {
+            width: 180px;
+            display: flex;
+            justify-content: space-between;
+
+            .iconDesktop {
+                display: none;
+            }
+
+            @include breakpoint(sm) {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                margin: 10px 0;
+
+                .iconDesktop {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-bottom: 30px;
+
+                    .desktopTitle {
+                        margin: 0 15px;
+                        color: $alabaster;
+                        text-transform: uppercase;
+                        font-size: $fs-xs;
+
+                        > span {
+                            font-weight: $fw-light;
+                        }
+
+                        > p {
+                            font-weight: $fw-regular;
+                        }
+                    }
+
+                    > span {
+                        width: 35px;
+                        height: 35px;
+                        border: 1px solid $alabaster;
+                        color: $alabaster;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+
+            > span {
+                width: 35px;
+                height: 35px;
+                border: 1px solid $alabaster;
+                color: $alabaster;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @include breakpoint(sm) {
+                    display: none;
+                }
+            }
+            .selected {
+                background-color: $lightBlue;
+                color: $marineBlue;
+            }
+
+        }
+    }
+
+    .content {
+        height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        top: -50px;
+        margin: 0 20px;
+
+        @include breakpoint(sm) {
+            position: static;
+            display: flex;
+            justify-content: flex-start;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: $alabaster;
+            border-radius: 5px;
+            padding: 20px 15px;
+
+            @include breakpoint(sm) {
+                max-width: 100%;
+            }
+
+            .hero {
+                > h1 {
+                    margin: 10px 0 10px 10px;
+                    font-size: $fs-reg;
+                    font-weight: $fw-bold;
+                    color: $marineBlue;
+                }
+                > p {
+                    margin: 10px 0 10px 10px;
+                    font-size: $fs-sm;
+                    font-weight: $fw-light;
+                    color: $coolGray;
+                }
+            }
+
+            .details {
+                display: flex;
+                flex-direction: column;
+                margin: 30px 10px;
+                padding: 10px;
+                background-color: $magnolia;
+                border-radius: 5px;
+
+                .plan {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px 20px 10px 20px;
+                    margin-bottom: 10px;
+                    border-color: $lightGray;
+                    border-bottom-style: solid;
+                    border-bottom-width: thin;
+
+                    .planSummary {
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 15px;
+
+                        .planTitle {
+                            font-weight: $fw-regular;
+                            font-size: $fs-sm;
+                            color: $marineBlue;
+                            padding-bottom: 5px;
+                        }
+
+                        .planChange {
+                            color: $coolGray;
+                            padding-bottom: 5px;
+                            cursor: pointer;
+                            text-decoration: underline;
+                        }
+                    }
+
+                    .planPrice {
+                        font-weight: $fw-regular;
+                        font-size: $fs-sm;
+                        color: $marineBlue;
+                    }
+                }
+
+                .addons {
+                    padding: 10px 20px 10px 30px;
+                    margin-bottom: 10px;
+
+                    .addon {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 10px 0;
+
+                        .addonTitle {
+                            color: $coolGray;
+                            font-size: $fs-sm;
+                            font-weight: $fw-light;
+                        }
+
+                        > span {
+                            color: $marineBlue;
+                            font-size: $fs-sm;
+                            font-weight: $fw-regular;
+                        }
+                    } 
+                }
+            }
+
+        .total {
+            padding: 10px 45px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+
+            .totalTitle {
+                color: $coolGray;
+                font-size: $fs-sm;
+                font-weight: $fw-light;
+            }
+
+            > span {
+                color: $purplishBlue;
+                font-size: $fs-sm;
+                font-weight: $fw-bold;
+            }
+        }         
+    }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            background-color: $white;
+            margin: 0 -20px;
+
+            @include breakpoint(sm) {
+                margin-right: 20px;
+                background-color: $alabaster;
+            }
+
+            > button {
+                padding: 5px 20px;
+                margin: 15px 10px;
+                background-color: $purplishBlue;
+                color: $magnolia;
+                border-radius: 4px;
+                border: none;
+                font-size: $fs-sm;
+                font-weight: $fw-regular;
+
+                &:hover {
+                    background-color: $coolGray;
+                }
+            }
+
+            .prev {
+                color: $coolGray;
+                background: none;
+                
+                &:hover{
+                    background-color: $lightGray
+                }
+            }
+        }
+    }
+}

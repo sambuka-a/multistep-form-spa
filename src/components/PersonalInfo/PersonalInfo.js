@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { firstStepData } from '../../store/formSlice';
 
@@ -9,28 +9,88 @@ const PersonalInfo = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const personalInfoData = useSelector(state => state.form.formData)
-  console.log(personalInfoData);
-
-  const [error, setError] = useState(false)
+  const [error, setError] = useState({})
+  const [info, setInfo] = useState({
+    userName: '',
+    userEmail: '',
+    phoneNumber: '',
+  })
 
   const handlePersonalInfo = (e) => {
-    dispatch(firstStepData({
-      [e.target.name]: e.target.value  
-    }))
+    const value = e.target.value
+    setInfo({
+      ...info,
+      [e.target.name] : value  
+    })
   }
 
-  const handleSubmit = () => {
-    navigate("/plan");
+  const validation = () => {
+    let valid = true
+    let errors = {}
+    let pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+    if(!info.userName.match(/^[a-zA-Z]{3,}$/)) {
+      valid = false;
+      errors['username'] = 'Wrong username'
+    } 
+
+    if(!pattern.test(info.userEmail)) {
+      valid = false;
+      errors['email'] = 'Wrong email'
+    } 
+
+    if(!info.phoneNumber.match(/^[0-9]{3,}$/)) {
+      valid = false;
+      errors['phone'] = 'Wrong phone'
+    } 
+
+    setError(errors)
+    return valid;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(validation()) {
+      dispatch(firstStepData(info))
+      navigate("/plan");
+    }
   }
 
   return (
     <div className={styles.personal}>
       <div className={styles.steps}>
         <div className={styles.stepsIcon}>
+          <div className={styles.iconDesktop}>
+            <span className={styles.selected}>1</span>
+            <div className={styles.desktopTitle}>
+              <span>step 1</span>
+              <p>Your info</p>
+            </div>
+          </div>
           <span className={styles.selected}>1</span>
+          <div className={styles.iconDesktop}>
+            <span>2</span>
+            <div className={styles.desktopTitle}>
+              <span>step 2</span>
+              <p>Select plan</p>
+            </div>
+          </div>
           <span>2</span>
+          <div className={styles.iconDesktop}>
+            <span>3</span>
+            <div className={styles.desktopTitle}>
+              <span>step 3</span>
+              <p>add-ons</p>
+            </div>
+          </div>
           <span>3</span>
+          <div className={styles.iconDesktop}>
+            <span>4</span>
+            <div className={styles.desktopTitle}>
+              <span>step 4</span>
+              <p>Summary</p>
+            </div>
+          </div>
           <span>4</span>
         </div>
       </div>
@@ -46,29 +106,31 @@ const PersonalInfo = () => {
                 type='text'
                 placeholder='e.g. Stephen King'
                 name='userName'
-                value={personalInfoData.userName}
+                value={info.userName}
                 onChange={handlePersonalInfo}
               />
-              {}
+              {error.username ? <span>{error.username}</span> : <span className={styles.cap}>cap</span>}
               <label>Email:</label>
               <input
                 type='text'
                 placeholder='e.g. stephenking@lorem.com'
                 name='userEmail'
-                value={personalInfoData.userEmail}
+                value={info.userEmail}
                 onChange={handlePersonalInfo}
               />
+              {error.email ? <span>{error.email}</span> : <span className={styles.cap}>cap</span>}
               <label>Phone number:</label>
               <input
                 placeholder='e.g. +1 234 567 890'
                 name='phoneNumber'
-                value={personalInfoData.phoneNumber}
+                value={info.phoneNumber}
                 onChange={handlePersonalInfo}
               />
+              {error.phone ? <span>{error.phone}</span> : <span className={styles.cap}>cap</span>}
           </form>
         </div>
         <div className={styles.footer}>
-          <button type ='submit' form='personalDataStep' disabled={error}>Next Step</button>
+          <button type ='submit' form='personalDataStep'>Next Step</button>
         </div>
       </div>
     </div>

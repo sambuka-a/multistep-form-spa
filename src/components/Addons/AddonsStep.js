@@ -13,9 +13,14 @@ const Addons = () => {
   const addons = useSelector(state => state.addons.addons)
 
   const onSubmit = () => {
-    const selectedAddons = addons.filter(i => i.selected).map(item => ({title: item.addonName, price: item.addonPrice}))
-    console.log(selectedAddons);
-  
+    const selectedAddons = addons.filter(i => i.selected).map(item => {
+      if(planDuration === 'mo') {
+        return ({title: item.addonName, price: item.addonPrice})
+      } else {
+        return ({title: item.addonName, price: item.addonPrice * priceMultiplier})
+      }
+    })
+
     dispatch(finalStepData(selectedAddons))
     navigate("/summary");
   }
@@ -28,12 +33,40 @@ const Addons = () => {
     <div className={styles.addons}>
       <div className={styles.steps}>
         <div className={styles.stepsIcon}>
-          <span>1</span>
-          <span>2</span>
-          <span className={styles.selected}>3</span>
-          <span>4</span>
+          <div className={styles.iconDesktop}>
+                <span>1</span>
+                <div className={styles.desktopTitle}>
+                  <span>step 1</span>
+                  <p>Your info</p>
+                </div>
+              </div>
+              <span>1</span>
+              <div className={styles.iconDesktop}>
+                <span>2</span>
+                <div className={styles.desktopTitle}>
+                  <span>step 2</span>
+                  <p>Select plan</p>
+                </div>
+              </div>
+              <span>2</span>
+              <div className={styles.iconDesktop}>
+                <span className={styles.selected}>3</span>
+                <div className={styles.desktopTitle}>
+                  <span>step 3</span>
+                  <p>add-ons</p>
+                </div>
+              </div>
+              <span className={styles.selected}>3</span>
+              <div className={styles.iconDesktop}>
+                <span>4</span>
+                <div className={styles.desktopTitle}>
+                  <span>step 4</span>
+                  <p>Summary</p>
+                </div>
+              </div>
+              <span>4</span>
+          </div>
         </div>
-      </div>
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.hero}>
@@ -42,7 +75,7 @@ const Addons = () => {
           </div>
           <div className={styles.cards}>
             {addons.map(i => (
-                <div className={styles.card} key={i.addonId}>
+                <div className={i.selected ? `${styles.card} ${styles.active}` : styles.card} key={i.addonId}>
                   <div className={styles.checkAndName}>
                     <input 
                       type="checkbox"

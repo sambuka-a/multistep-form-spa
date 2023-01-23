@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import styles from './Summary.module.scss'
+
 const Summary = () => {
   const navigate = useNavigate();
   const userSelection = useSelector(state => state.form.formData)
@@ -8,31 +10,76 @@ const Summary = () => {
   const totalPrice = userSelection.addons.reduce((acc, i) => acc + i.price, 0) + userSelection.planPrice
 
   return (
-    <div>
-      <div>
-        <h1>Finishing up</h1>
-        <p>Double-check everything looks OK before confirming.</p>
+    <div className={styles.summary}>
+      <div className={styles.steps}>
+        <div className={styles.stepsIcon}>
+          <div className={styles.iconDesktop}>
+              <span>1</span>
+              <div className={styles.desktopTitle}>
+                <span>step 1</span>
+                <p>Your info</p>
+              </div>
+            </div>
+            <span>1</span>
+            <div className={styles.iconDesktop}>
+              <span>2</span>
+              <div className={styles.desktopTitle}>
+                <span>step 2</span>
+                <p>Select plan</p>
+              </div>
+            </div>
+            <span>2</span>
+            <div className={styles.iconDesktop}>
+              <span>3</span>
+              <div className={styles.desktopTitle}>
+                <span>step 3</span>
+                <p>add-ons</p>
+              </div>
+            </div>
+            <span>3</span>
+            <div className={styles.iconDesktop}>
+              <span className={styles.selected}>4</span>
+              <div className={styles.desktopTitle}>
+                <span>step 4</span>
+                <p>Summary</p>
+              </div>
+            </div>
+            <span className={styles.selected}>4</span>
+          </div>
       </div>
-      <div>
-        <div>
-          <span>{userSelection.planName} {userSelection.handlePlanDuration === 'yr' ? "(Yearly)" : "(Monthly)"}</span>
-          <span>{`$${userSelection.planPrice}/${userSelection.planDuration}`}</span>
-          <div>
-            <p onClick={() => {navigate('/plan')}}>Change</p>
+      <div className={styles.content}>
+        <div className={styles.container}>
+          <div className={styles.hero}>
+            <h1>Finishing up</h1>
+            <p>Double-check everything looks OK before confirming.</p>
+          </div>
+          <div className={styles.details}>
+            <div className={styles.plan}>
+              <div className={styles.planSummary}>
+                <span className={styles.planTitle}>{userSelection.planName} {userSelection.planDuration === 'yr' ? "(Yearly)" : "(Monthly)"}</span>
+                <span className={styles.planChange} onClick={() => {navigate('/plan')}}>Change</span>
+              </div>       
+              <span className={styles.planPrice}>{`$${userSelection.planPrice}/${userSelection.planDuration}`}</span>
+            </div>
+            <div className={styles.addons}>
+              {userSelection.addons.map(item => (
+                <div key={item.title} className={styles.addon}>
+                  <span className={styles.addonTitle}>{item.title}</span>
+                  <span>+${item.price}/{userSelection.planDuration}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={styles.total}>
+            <span className={styles.totalTitle}>Total (per  {userSelection.planDuration === 'yr' ? "year" : "Month"})</span>
+            <span>+{totalPrice}/{userSelection.planDuration}</span>
           </div>
         </div>
-        <div>
-          {userSelection.addons.map(item => (
-            <li>{item.title} ${item.price}/{userSelection.planDuration}</li>
-          ))}
-        </div>
-        <div>
-          <span>Total per{userSelection.handlePlanDuration === 'yr' ? "year" : "Month"}</span>
-          <span>+{totalPrice}/{userSelection.planDuration}</span>
+        <div className={styles.footer}>
+          <button className={styles.prev} onClick={() => {navigate("/addons")}}>Go Back</button>
+          <button onClick={() => {navigate("/thankyou")}}>Confirm</button>
         </div>
       </div>
-      <button onClick={() => {navigate("/addons")}}>Prev</button>
-      <button onClick={() => {navigate("/thankYou")}}>Confirm</button>
     </div>
   )
 }

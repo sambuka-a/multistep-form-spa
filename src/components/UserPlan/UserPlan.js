@@ -10,7 +10,6 @@ const UserPlan = () => {
   const navigate = useNavigate();
   const userPlanFormData = useSelector(state => state.userPlan.userPlans)
   const planIsMonthly = useSelector(state => state.userPlan.userPlanIsMonthly)
-  console.log(planIsMonthly);
   const selectedPlan = useSelector(state => state.userPlan.userPlans.filter(i => i.selected))
 
   const handlePlanDuration = () => {
@@ -23,7 +22,7 @@ const UserPlan = () => {
     dispatch(setUserPlanData(id))
   }
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
     dispatch(secondStepData({
       planName: selectedPlan[0].planName, 
       planPrice: selectedPlan[0].planPrice, 
@@ -36,12 +35,40 @@ const UserPlan = () => {
     <div className={styles.plan}>
       <div className={styles.steps}>
         <div className={styles.stepsIcon}>
-          <span>1</span>
-          <span className={styles.selected}>2</span>
-          <span>3</span>
-          <span>4</span>
+          <div className={styles.iconDesktop}>
+              <span>1</span>
+              <div className={styles.desktopTitle}>
+                <span>step 1</span>
+                <p>Your info</p>
+              </div>
+            </div>
+            <span>1</span>
+            <div className={styles.iconDesktop}>
+              <span className={styles.selected}>2</span>
+              <div className={styles.desktopTitle}>
+                <span>step 2</span>
+                <p>Select plan</p>
+              </div>
+            </div>
+            <span className={styles.selected}>2</span>
+            <div className={styles.iconDesktop}>
+              <span>3</span>
+              <div className={styles.desktopTitle}>
+                <span>step 3</span>
+                <p>add-ons</p>
+              </div>
+            </div>
+            <span>3</span>
+            <div className={styles.iconDesktop}>
+              <span>4</span>
+              <div className={styles.desktopTitle}>
+                <span>step 4</span>
+                <p>Summary</p>
+              </div>
+            </div>
+            <span>4</span>
+          </div>
         </div>
-      </div>
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.hero}>
@@ -61,12 +88,12 @@ const UserPlan = () => {
             ))}
           </div>
           <div className={styles.durSelector}>
-            <span className={!planIsMonthly && `${styles.selected}`}>Monthly</span>
+            <span className={!planIsMonthly ? `${styles.selected}` : null}>Monthly</span>
             <input 
               type="checkbox"
               checked={!planIsMonthly} 
               onChange={() => {handlePlanDuration()}}/>
-            <span className={planIsMonthly && `${styles.selected}`}>Yearly</span>
+            <span className={planIsMonthly ? `${styles.selected}` : null}>Yearly</span>
           </div>
         </div>
         <div className={styles.footer}>

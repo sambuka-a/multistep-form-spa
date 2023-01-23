@@ -12,15 +12,14 @@ const formSlice = createSlice({
                 planDuration: '',
                 planPrice: 0,
                 priceMultiplier: 10,
-                addons: null,
+                addons: [],
             }
     },
     reducers: {
         firstStepData(state, action) {
-            console.log(action.payload);
             state.formData.userName = action.payload.userName
-            state.formData.userEmail = action.payload.userEmail || state.formData.userEmail
-            state.formData.phoneNumber = action.payload.phoneNumber || state.formData.phoneNumber
+            state.formData.userEmail = action.payload.userEmail
+            state.formData.phoneNumber = action.payload.phoneNumber
         },
         secondStepData(state, action) {
             state.formData.planName = action.payload.planName
@@ -33,7 +32,6 @@ const formSlice = createSlice({
             }  
         },
         finalStepData(state, action) {
-            console.log(action.payload);
             state.formData.addons = action.payload
         },
     }

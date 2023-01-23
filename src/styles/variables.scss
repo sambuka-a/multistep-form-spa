@@ -26,13 +26,13 @@ $fw-regular: 500;
 $fw-bold: 700;
 
 //font sizes
-$fs-xs: 14px;
-$fs-sm: 18px;
-$fs-reg: 28px;
+$fs-xs: 16px;
+$fs-sm: 20px;
+$fs-reg: 32px;
 
 //breakpoints
 $sm: 763px;
-$lg: 1440px;
+$lg: 1024px;
 
 @mixin breakpoint($point) {
     @if $point == sm {
